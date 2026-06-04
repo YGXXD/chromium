@@ -1,0 +1,8 @@
+// Copyright 2026 YGXXD
+
+interface XdLottie {
+    attribute DOMString assetsPath;
+    readonly attribute float width;
+    readonly attribute float height;
+    readonly attribute float duration;
+};

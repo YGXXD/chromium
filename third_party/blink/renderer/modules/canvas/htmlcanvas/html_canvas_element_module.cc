@@ -12,6 +12,8 @@
 #include "third_party/blink/renderer/modules/canvas/htmlcanvas/canvas_context_creation_attributes_helpers.h"
 #include "third_party/blink/renderer/platform/text/layout_locale.h"
 
+#include "third_party/blink/renderer/modules/canvas/canvas2d/xd_lottie.h"
+
 namespace blink {
 
 V8RenderingContext* HTMLCanvasElementModule::getContext(
@@ -85,6 +87,12 @@ OffscreenCanvas* HTMLCanvasElementModule::TransferControlToOffscreenInternal(
                                      bridge->GetFrameSinkId().sink_id());
   }
   return offscreen_canvas;
+}
+
+XdLottie* HTMLCanvasElementModule::loadXdLottie(HTMLCanvasElement& canvas,
+                                                String json) {
+  LocalDOMWindow* window = canvas.GetDocument().domWindow();
+  return XdLottie::Create(*window, json);
 }
 
 }  // namespace blink

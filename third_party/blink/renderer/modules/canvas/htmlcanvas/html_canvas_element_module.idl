@@ -20,4 +20,6 @@ typedef (CanvasRenderingContext2D or
 
     [CallWith=ScriptState,
      RaisesException, MeasureAs=OffscreenCanvas] OffscreenCanvas transferControlToOffscreen();
+
+    XdLottie loadXdLottie(DOMString json);
 };

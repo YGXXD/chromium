@@ -980,10 +980,10 @@ void PaintOpReader::Read(SkGradientShader::Interpolation* interpolation) {
 }
 
 void PaintOpReader::Read(scoped_refptr<SkottieWrapper>* skottie) {
-  if (!options_.is_privileged) {
-    valid_ = false;
-    return;
-  }
+  // if (!options_.is_privileged) {
+  //   valid_ = false;
+  //   return;
+  // }
 
   uint32_t transfer_cache_entry_id;
   ReadSimple(&transfer_cache_entry_id);
