@@ -2730,6 +2730,8 @@ generated_interface_sources_in_modules = [
   "$root_gen_dir/third_party/blink/renderer/bindings/modules/v8/v8_mesh_2d_vertex_buffer.h",
   "$root_gen_dir/third_party/blink/renderer/bindings/modules/v8/v8_path_2d.cc",
   "$root_gen_dir/third_party/blink/renderer/bindings/modules/v8/v8_path_2d.h",
+  "$root_gen_dir/third_party/blink/renderer/bindings/modules/v8/v8_xd_lottie.cc",
+  "$root_gen_dir/third_party/blink/renderer/bindings/modules/v8/v8_xd_lottie.h",
   "$root_gen_dir/third_party/blink/renderer/bindings/modules/v8/v8_payment_address.cc",
   "$root_gen_dir/third_party/blink/renderer/bindings/modules/v8/v8_payment_address.h",
   "$root_gen_dir/third_party/blink/renderer/bindings/modules/v8/v8_payment_manager.cc",

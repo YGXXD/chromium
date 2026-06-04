@@ -3208,11 +3208,11 @@ void RasterDecoderImpl::DoCreateTransferCacheEntryINTERNAL(
     return;
   }
 
-  if (entry_type == cc::TransferCacheEntryType::kSkottie && !is_privileged_) {
-    LOCAL_SET_GL_ERROR(GL_INVALID_VALUE, "glCreateTransferCacheEntryINTERNAL",
-                       "Attempt to use skottie on a non privileged channel");
-    return;
-  }
+  // if (entry_type == cc::TransferCacheEntryType::kSkottie && !is_privileged_) {
+  //   LOCAL_SET_GL_ERROR(GL_INVALID_VALUE, "glCreateTransferCacheEntryINTERNAL",
+  //                      "Attempt to use skottie on a non privileged channel");
+  //   return;
+  // }
 
   if (data_shm_offset % cc::PaintOpWriter::kMaxAlignment != 0) {
     LOCAL_SET_GL_ERROR(GL_INVALID_VALUE, "glCreateTransferCacheEntryINTERNAL",

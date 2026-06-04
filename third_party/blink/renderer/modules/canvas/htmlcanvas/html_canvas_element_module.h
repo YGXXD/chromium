@@ -33,6 +33,7 @@ class MODULES_EXPORT HTMLCanvasElementModule {
   static OffscreenCanvas* transferControlToOffscreen(ScriptState*,
                                                      HTMLCanvasElement&,
                                                      ExceptionState&);
+  static class XdLottie* loadXdLottie(HTMLCanvasElement& canvas, String json);
 
  private:
   static OffscreenCanvas* TransferControlToOffscreenInternal(

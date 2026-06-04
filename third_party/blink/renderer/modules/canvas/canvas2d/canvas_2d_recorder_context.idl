@@ -96,4 +96,7 @@ interface mixin Canvas2DRecorderContext {
     void setLineDash(sequence<unrestricted double> dash);
     sequence<unrestricted double> getLineDash();
     [NoAllocDirectCall=Setter] attribute unrestricted double lineDashOffset;
+
+    // lottie
+    void drawXdLottie(XdLottie xd_lottie, unrestricted double progress, unrestricted double x, unrestricted double y, unrestricted double width, unrestricted double height);
 };

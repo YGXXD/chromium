@@ -151,6 +151,12 @@
 #include "ui/gfx/geometry/vector2d_f.h"
 #include "v8/include/v8-local-handle.h"
 
+// xd lottie support
+#include "cc/paint/skottie_wrapper.h"
+#include "cc/paint/skottie_color_map.h"
+#include "cc/paint/skottie_frame_data.h"
+#include "third_party/blink/renderer/modules/canvas/canvas2d/xd_lottie.h"
+
 // UMA Histogram macros trigger a bug in IWYU.
 // https://github.com/include-what-you-use/include-what-you-use/issues/1546
 // IWYU pragma: no_include <atomic>
@@ -1805,6 +1811,47 @@ void Canvas2DRecorderContext::strokeRect(double x,
       GetState().HasPattern(CanvasRenderingContext2DState::kStrokePaintType)
           ? CanvasRenderingContext2DState::kNonOpaqueImage
           : CanvasRenderingContext2DState::kNoImage,
+      CanvasPerformanceMonitor::DrawType::kRectangle);
+}
+
+void Canvas2DRecorderContext::drawXdLottie(XdLottie* xd_lottie,
+                                            double progress,
+                                            double x,
+                                            double y,
+                                            double width,
+                                            double height) {
+  if (!ValidateRectForCanvas(x, y, width, height)) {
+    return;
+  }
+
+  if (!GetOrCreatePaintCanvas()) {
+    return;
+  }
+
+  const CanvasRenderingContext2DState& state = GetState();
+  const bool has_pattern =
+      state.HasPattern(CanvasRenderingContext2DState::kFillPaintType);
+
+  AdjustRectForCanvas(x, y, width, height);
+  gfx::RectF rect(ClampTo<float>(x), ClampTo<float>(y), ClampTo<float>(width),
+                  ClampTo<float>(height));
+  Draw<OverdrawOp::kNone>(
+      [xd_lottie, progress, rect](cc::PaintCanvas* c,
+                                  const cc::PaintFlags* flags) {
+        scoped_refptr<cc::SkottieWrapper> skottie = xd_lottie->skottie();
+        cc::SkottieFrameDataMap all_frame_data;
+        xd_lottie->LoadAllFrameData(progress, all_frame_data);
+        c->drawSkottie(skottie, gfx::RectFToSkRect(rect),
+                       static_cast<float>(progress), std::move(all_frame_data),
+                       cc::SkottieColorMap(),
+                       skottie->GetCurrentTextPropertyValues());
+      },
+      [rect, this](const SkIRect& clip_bounds) {
+        return RectContainsTransformedRect(rect, clip_bounds);
+      },
+      rect, CanvasRenderingContext2DState::kFillPaintType,
+      has_pattern ? CanvasRenderingContext2DState::kNonOpaqueImage
+                  : CanvasRenderingContext2DState::kNoImage,
       CanvasPerformanceMonitor::DrawType::kRectangle);
 }
 

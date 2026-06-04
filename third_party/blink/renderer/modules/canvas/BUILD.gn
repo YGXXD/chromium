@@ -55,6 +55,12 @@ blink_modules_sources("canvas") {
     "offscreencanvas2d/offscreen_canvas_rendering_context_2d.cc",
     "offscreencanvas2d/offscreen_canvas_rendering_context_2d.h",
     "testing/canvas_test_utils.cc",
+    "canvas2d/xd_lottie.h",
+    "canvas2d/xd_lottie.cc",
+    "canvas2d/xd_lottie_frame_data_provider.h",
+    "canvas2d/xd_lottie_frame_data_provider.cc",
+    "canvas2d/xd_lottie_image_loader.h",
+    "canvas2d/xd_lottie_image_loader.cc",
   ]
 
   deps = [

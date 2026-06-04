@@ -99,6 +99,8 @@ enum RespectImageOrientationEnum : uint8_t;
 template <typename T>
 class NotShared;
 
+class XdLottie;
+
 class MODULES_EXPORT Canvas2DRecorderContext : public CanvasPath {
  public:
   Canvas2DRecorderContext(const Canvas2DRecorderContext&) = delete;
@@ -226,6 +228,13 @@ class MODULES_EXPORT Canvas2DRecorderContext : public CanvasPath {
   void clearRect(double x, double y, double width, double height);
   void fillRect(double x, double y, double width, double height);
   void strokeRect(double x, double y, double width, double height);
+
+  void drawXdLottie(XdLottie* xd_lottie,
+                     double progress,
+                     double x,
+                     double y,
+                     double width,
+                     double height);
 
   void drawImage(const V8CanvasImageSource* image_source,
                  double x,
